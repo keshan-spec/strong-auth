@@ -6,3 +6,4 @@
 - [ ] Add Email and Mobile verification
 - [ ] Add OTP Functionality for Login
 - [ ] Session/Cookie timeout
+- [ ] Show login fail attempts
