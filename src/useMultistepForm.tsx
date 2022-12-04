@@ -13,6 +13,7 @@ export const useMultistepForm = (steps: ReactElement[]) => {
         step: steps[currStepIdx], // Current step
         nextStep, // Function to go to next step
         prevStep, // Function to go to previous step
-        goToStep // Function to go to a specific step
+        goToStep, // Function to go to a specific step
+        isLastStep: currStepIdx === steps.length - 1, // Boolean to check if the current step is the last step
     }
 }
