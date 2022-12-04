@@ -1,0 +1,33 @@
+input{
+    border: 1px solid #e0e0e0;
+    border-radius: 0;
+    box-shadow: none;
+    padding : 5px;
+    height: 25px;
+    // display: block;
+}
+
+.contact_form{
+    display: grid;
+    // grid-template-areas: 
+    // "country country"
+    // "postal postal"
+    // "address address"
+    // "city state"
+    // "code phone";
+
+}
+.country_code{
+    display: grid;
+    grid-template-areas: "flag code phone";
+    width: 100px;
+    img{
+        grid-area: flag;
+        width: 20px;
+        // height: 30px;
+    }
+    span {
+        user-select: none;
+        grid-area: code;
+    }
+}

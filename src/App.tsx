@@ -1,10 +1,13 @@
 import { ReactElement, useState } from "react";
-import { ContactDetailsForm } from "./components/ContactDetailsForm";
+import { ContactDetailsForm } from "./components/CountryForm/ContactDetailsForm";
 import { AccountDetailsForm } from "./components/AccountDetailsForm";
-import { ExampleComponent } from "./components/ExampleComponent";
 import { UserForm } from "./components/UserForm";
 import { useMultistepForm } from "./useMultistepForm";
-import { VerifyEmail } from "./components/VerifyEmail";
+// import { ExampleComponent } from "./components/ExampleComponent";
+// import { VerifyEmail } from "./components/VerifyEmail";
+
+import './sass/forms.css'
+
 
 type FormData = {
   fullname: string;
@@ -44,7 +47,7 @@ const App: React.FC = () => {
   // Mutlistep form Array
   const steps: ReactElement[] = [
     // <ExampleComponent {...data} updateField={updateField} />,
-    <UserForm {...data} updateField={updateField} />,
+    // <UserForm {...data} updateField={updateField} />,
     <ContactDetailsForm {...data} updateField={updateField} />,
     <AccountDetailsForm {...data} updateField={updateField} />,
   ];

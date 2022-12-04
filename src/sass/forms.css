@@ -1,0 +1,38 @@
+input {
+  border: 1px solid #e0e0e0;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  padding: 5px;
+  height: 25px;
+}
+
+.contact_form {
+  display: -ms-grid;
+  display: grid;
+}
+
+.country_code {
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: "flag code phone";
+  width: 100px;
+}
+
+.country_code img {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: flag;
+  width: 20px;
+}
+
+.country_code span {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: code;
+}
+/*# sourceMappingURL=forms.css.map */
