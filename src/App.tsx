@@ -1,5 +1,5 @@
 import { ReactElement, useState } from "react";
-import { ContactDetailsForm } from "./components/ContactDetailsForm";
+import { ContactDetailsForm } from "./components/ContactForm/ContactDetailsForm";
 import { AccountDetailsForm } from "./components/AccountDetailsForm";
 import { ExampleComponent } from "./components/ExampleComponent";
 import { UserForm } from "./components/UserForm";
@@ -40,7 +40,18 @@ const App: React.FC = () => {
   const [data, setData] = useState<FormData>(INITIAL_FORM_DATA);
   // Funcion to update the form data
   const updateField = (fields: Partial<FormData>) => setData({ ...data, ...fields });
-
+  // TODO: Add a function to validate the form data and refactor this messy code
+  const dataIsValid = () => {
+    if (currStepIdx === 0) { // UserForm
+      return data.fullname && data.age && data.gender
+    }
+    if (currStepIdx === 1) { // ContactDetailsForm
+      return data.address && data.city && data.postalCode && data.country && data.mobileNo && data.mobileCountryCode
+    }
+    if (currStepIdx === 2) { // AccountDetailsForm
+      return data.email && data.password
+    }
+  }
   // Mutlistep form Array
   const steps: ReactElement[] = [
     // <ExampleComponent {...data} updateField={updateField} />,
@@ -60,7 +71,9 @@ const App: React.FC = () => {
       console.log('Form submitted');
       console.log(data);
     }
-    nextStep()
+    if (dataIsValid()) {
+      nextStep();
+    }
   }
 
   return (

@@ -1,4 +1,8 @@
-import { FormWrapperHOC } from '../FormWrapperHOC';
+import { FormWrapperHOC } from '../../FormWrapperHOC';
+import ReactSelect from "react-select";
+import { useState, useEffect } from 'react';
+import { fetchCountries, fetchCountryCode } from './api';
+
 
 type stateData = {
     mobileNo: string;
@@ -14,7 +18,28 @@ type FormProps = stateData & {
     updateField: (fields: Partial<stateData>) => void
 }
 
+type Country = {
+    label: string;
+    value: string;
+}
+
+type APIResponse = {
+    countries: Country[];
+}
+
 export const ContactDetailsForm: React.FC<FormProps> = ({ address, city, country, mobileCountryCode, mobileNo, postalCode, state, updateField }) => {
+    const [countryList, setCountryList] = useState<APIResponse[]>([])
+    const [countryCode, setCountryCode] = useState('')
+
+    useEffect(() => {
+        fetchCountries().then(res => setCountryList(res))
+
+    }, [])
+    const handleCountryChange = (e: any) => {
+        updateField({ country: e.value })
+        fetchCountryCode(e.value).then(res => setCountryCode(res.code))
+    }
+
     return (
         <FormWrapperHOC title="Contact details">
             <div>
@@ -32,20 +57,19 @@ export const ContactDetailsForm: React.FC<FormProps> = ({ address, city, country
             </div>
             <div>
                 <label htmlFor="state">State</label>
-                <input type="text" required id="state" onChange={e => updateField({ state: e.target.value })} value={state} />
+                <input type="text" id="state" onChange={e => updateField({ state: e.target.value })} value={state} />
             </div>
             <div>
                 <label htmlFor="postalCode">Postal Code</label>
                 <input type="text" required id="postalCode" onChange={e => updateField({ postalCode: e.target.value })} value={postalCode} />
             </div>
             <div>
-                <label htmlFor="country">Country</label>
-                <select id="country" onChange={e => updateField({ country: e.target.value })} value={country}>
-                    <option value="lk">Sri Lanka</option>
-                    <option value="us">USA</option>
-                    <option value="ca">Canada</option>
-                    <option value="uk">United Kingdom</option>
-                </select>
+                <ReactSelect
+                    required
+                    options={countryList}
+                    value={countryList.find(option => option.value == country) || null}
+                    onChange={handleCountryChange}
+                />
             </div>
         </FormWrapperHOC>
     );

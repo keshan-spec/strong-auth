@@ -1,4 +1,5 @@
 import { FormWrapperHOC } from '../FormWrapperHOC';
+import ReactSelect from "react-select";
 
 type stateData = {
     fullname: string;
@@ -11,6 +12,12 @@ type FormProps = stateData & {
 }
 
 export const UserForm: React.FC<FormProps> = ({ fullname, age, gender, updateField }) => {
+    const options = [
+        { value: 'male', label: 'Male' },
+        { value: 'female', label: 'Female' },
+        { value: 'other', label: 'Other' },
+        { value: 'noprefer', label: 'Prefer not to say' }
+    ]
     return (
         <FormWrapperHOC title="User Details">
             <div>
@@ -19,11 +26,12 @@ export const UserForm: React.FC<FormProps> = ({ fullname, age, gender, updateFie
                 <label htmlFor="age">Age</label>
                 <input type="number" required id="age" onChange={e => updateField({ age: parseInt(e.target.value) })} value={age} />
                 <label htmlFor="gender">Gender</label>
-                <select id="gender" onChange={e => updateField({ gender: e.target.value })} value={gender}>
-                    <option value="0">Select</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
+                <ReactSelect
+                    required
+                    options={options}
+                    value={options.find(option => option.value == gender) || null}
+                    onChange={(e: any) => updateField({ gender: e.value })}
+                />
             </div>
         </FormWrapperHOC>
     );
