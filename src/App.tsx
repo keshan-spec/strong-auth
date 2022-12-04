@@ -6,6 +6,9 @@ import { UserForm } from "./components/UserForm";
 import { useMultistepForm } from "./useMultistepForm";
 import { VerifyEmail } from "./components/VerifyEmail";
 
+// styles
+import "./sass/forms.css";
+
 type FormData = {
   fullname: string;
   email: string;
@@ -46,7 +49,7 @@ const App: React.FC = () => {
       return data.fullname && data.age && data.gender
     }
     if (currStepIdx === 1) { // ContactDetailsForm
-      return data.address && data.city && data.postalCode && data.country && data.mobileNo && data.mobileCountryCode
+      return data.address && data.city && data.postalCode && data.country && data.mobileNo
     }
     if (currStepIdx === 2) { // AccountDetailsForm
       return data.email && data.password
@@ -77,15 +80,24 @@ const App: React.FC = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={formSubmitHandler}>
+    <div className="container">
+      <div className="header">
+        {/* Header */}
+      </div>
+      <form onSubmit={formSubmitHandler} className="form">
         {currStepIdx + 1}/{steps.length}
-        {step}
-        {currStepIdx > 0 && <button type="button" onClick={prevStep}>Prev</button>}
-        <button type="submit">{isLastStep ? "Create Account" : "Next"}</button>
+        <div className="form_container">
+          {step}
+          <div className="control_buttons">
+            <button type="button" disabled={currStepIdx <= 0} onClick={prevStep}>Prev</button>
+            <button className="next" type="submit">{isLastStep ? "Create Account" : "Next"}</button>
+          </div>
+        </div>
         {/* TODO: Implement conditions for GoTo Button */}
       </form>
+      <div className="footer"></div>
     </div>
+
   );
 }
 

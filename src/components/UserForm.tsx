@@ -22,9 +22,12 @@ export const UserForm: React.FC<FormProps> = ({ fullname, age, gender, updateFie
         <FormWrapperHOC title="User Details">
             <div>
                 <label htmlFor="name">Fullname</label>
-                <input type="text" required id="name" onChange={e => updateField({ fullname: e.target.value })} value={fullname} />
+                <input type="text" required id="name" onChange={e => updateField({ fullname: e.target.value })} value={fullname} /></div>
+            <div>
                 <label htmlFor="age">Age</label>
                 <input type="number" required id="age" onChange={e => updateField({ age: parseInt(e.target.value) })} value={age} />
+            </div>
+            <div>
                 <label htmlFor="gender">Gender</label>
                 <ReactSelect
                     required
