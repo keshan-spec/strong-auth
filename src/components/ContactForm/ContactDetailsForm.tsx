@@ -47,7 +47,7 @@ export const ContactDetailsForm: React.FC<FormProps> = ({ address, city, country
                 <ReactSelect
                     required
                     options={countryList}
-                    value={countryList.find(option => option.value == country) || null}
+                    // value={countryList.find(option => option.value == country) || null}
                     onChange={handleCountryChange}
                 />
             </div>
