@@ -28,7 +28,7 @@ type APIResponse = {
 }
 
 export const ContactDetailsForm: React.FC<FormProps> = ({ address, city, country, mobileCountryCode, mobileNo, postalCode, state, updateField }) => {
-    const [countryList, setCountryList] = useState<APIResponse[]>([])
+    const [countryList, setCountryList] = useState<APIResponse[]>()
     const [countryCode, setCountryCode] = useState('')
 
     useEffect(() => {
@@ -44,12 +44,12 @@ export const ContactDetailsForm: React.FC<FormProps> = ({ address, city, country
         <FormWrapperHOC title="Contact details">
             <div>
                 <label >Country</label>
-                <ReactSelect
+                {/* <ReactSelect
                     required
                     options={countryList}
                     value={countryList.find(option => option.value == country) || null}
                     onChange={handleCountryChange}
-                />
+                /> */}
             </div>
             <div>
                 <label htmlFor="mobileNo">Mobile No</label>
